@@ -1,0 +1,12 @@
+{
+  "trainList": [
+    {
+      "id": 1,
+      "trafficStatus": true
+    },
+    {
+      "id": 2,
+      "trafficStatus": false
+    }
+  ]
+}
