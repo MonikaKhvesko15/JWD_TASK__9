@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<trains>
+    <train>
+        <id>1</id>
+        <traffic-status>true</traffic-status>
+    </train>
+    <train>
+        <id>2</id>
+        <traffic-status>true</traffic-status>
+    </train>
+    <train>
+        <id>3</id>
+        <traffic-status>false</traffic-status>
+    </train>
+    <train>
+        <id>4</id>
+        <traffic-status>false</traffic-status>
+    </train>
+    <train>
+        <id>5</id>
+        <traffic-status>true</traffic-status>
+    </train>
+    <train>
+        <id>6</id>
+        <traffic-status>false</traffic-status>
+    </train>
+    <train>
+        <id>7</id>
+        <traffic-status>true</traffic-status>
+    </train>
+    <train>
+        <id>8</id>
+        <traffic-status>true</traffic-status>
+    </train>
+    <train>
+        <id>9</id>
+        <traffic-status>true</traffic-status>
+    </train>
+    <train>
+        <id>10</id>
+        <traffic-status>false</traffic-status>
+    </train>
+</trains>
