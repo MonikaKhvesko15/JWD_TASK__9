@@ -1,4 +1,4 @@
-package com.epam.task9.data;
+package com.epam.task9.exception;
 
 
 public class DataException extends Exception {

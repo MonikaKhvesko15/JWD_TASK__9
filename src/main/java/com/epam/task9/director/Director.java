@@ -1,12 +1,11 @@
 package com.epam.task9.director;
 
-import com.epam.task9.data.DataException;
+import com.epam.task9.exception.DataException;
 import com.epam.task9.data.JsonTrainCreator;
 import com.epam.task9.data.TrainCreator;
 import com.epam.task9.entity.Train;
-import com.epam.task9.entity.Tunnel;
-import com.epam.task9.logic.RailwaySemaphoreSignal;
-import com.epam.task9.logic.TrainLoader;
+import org.apache.log4j.Logger;
+
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -14,36 +13,29 @@ import java.util.concurrent.TimeUnit;
 
 public class Director {
 
-    public static final String TRAINS_JSON = "Trains.json";
+    private static final String TRAINS_JSON = "Trains.json";
+    private static final Logger log = Logger.getLogger(Director.class);
 
     public static void main(String[] args) throws DataException {
 
-        int threadNumber = Runtime.getRuntime().availableProcessors();
-        System.out.println("Available number of threads: " + threadNumber);
-        //create thread pool
-        ExecutorService service = Executors.newFixedThreadPool(threadNumber);
-
-        Tunnel tunnel = new Tunnel();
-
-        //create train list
         TrainCreator creator = new JsonTrainCreator();
         List<Train> trainList = creator.createTrains(TRAINS_JSON).getTrainList();
 
-        TrainLoader trainLoader = new TrainLoader(tunnel, trainList);
+        int threadNumber = trainList.size();
+        log.info("Thread number: " + threadNumber);
 
-        RailwaySemaphoreSignal firstSemaphore = new RailwaySemaphoreSignal(tunnel, false);
-        //RailwaySemaphoreSignal secondSemaphore = new RailwaySemaphoreSignal(tunnel, false);
-
-        service.execute(trainLoader);
-        service.execute(firstSemaphore);
+        ExecutorService service = Executors.newFixedThreadPool(threadNumber);
+        trainList.forEach(service::submit);
 
         service.shutdown();
-        TimeUnit timeUnit = TimeUnit.SECONDS;
+
         try {
-            if (!service.awaitTermination(60,timeUnit)) {
+            if (!service.awaitTermination(30, TimeUnit.SECONDS)) {
                 service.shutdownNow();
+                if (!service.awaitTermination(30, TimeUnit.SECONDS))
+                    log.warn("Service not terminate!");
             }
-        } catch (InterruptedException ex) {
+        } catch (InterruptedException e) {
             service.shutdownNow();
             Thread.currentThread().interrupt();
         }
