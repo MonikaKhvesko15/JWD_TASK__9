@@ -1,0 +1,44 @@
+{
+  "trainList": [
+    {
+        "id": 1,
+        "trafficStatus": false
+    },
+    {
+        "id": 2,
+        "trafficStatus": false
+    },
+    {
+        "id": 3,
+        "trafficStatus": true
+    },
+    {
+        "id": 4,
+        "trafficStatus": false
+    },
+    {
+        "id": 5,
+        "trafficStatus": false
+    },
+    {
+        "id": 6,
+        "trafficStatus": false
+    },
+    {
+        "id": 7,
+        "trafficStatus": true
+    },
+    {
+        "id": 8,
+        "trafficStatus": true
+    },
+    {
+        "id": 9,
+        "trafficStatus": false
+    },
+    {
+        "id": 10,
+        "trafficStatus": false
+    }
+  ]
+}
